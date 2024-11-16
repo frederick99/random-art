@@ -19,19 +19,19 @@ const cool = node_cond(
     node_triple(_r = node_mod(NODE_X, NODE_Y), _r, _r),
 );
 
-const grammar = {
-    E: [
-        grammar_branch(node_triple(_c = node_rule('C'), _c, _c), 1),
-    ],
+const RULE_A = node_rule('A');
+const RULE_C = node_rule('C');
+const GRAMMAR = {
+    E: uniform_branches(node_triple(RULE_C, RULE_C, RULE_C)),
     A: uniform_branches(NODE_X, NODE_Y, NODE_T, NODE_MOUSEX, NODE_MOUSEY, NODE_RANDOM),
     C: uniform_branches(
-        node_rule('A'),
-        node_abs(node_rule('C')),
-        node_add(_c = node_rule('C'), _c),
-        node_mult(_c = node_rule('C'), _c),
+        RULE_A,
+        node_abs(RULE_C),
+        node_add(RULE_C, RULE_C),
+        node_mult(RULE_C, RULE_C),
     ),
 };
 
-const random = random_art(grammar, 'E', DEPTH);
+const random = random_art(GRAMMAR, 'E', DEPTH);
 
 render_wgpu(gen_fragment_expr(random), canvas);

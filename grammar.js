@@ -68,8 +68,7 @@ function gen_fragment_expr(node) {
             let cond = gen_fragment_expr(node.cond);
             let then = gen_fragment_expr(node.then);
             let elze = gen_fragment_expr(node.elze);
-            // return `(f32(${cond}) * (${then}) + f32(!(${cond})) * (${elze}))`;
-            return `(${cond} ? ${then} : ${elze})`;
+            return `(f32(${cond}) * (${then}) + f32(!(${cond})) * (${elze}))`;
         }
         case NodeKind.RANDOM:
         case NodeKind.RULE:
